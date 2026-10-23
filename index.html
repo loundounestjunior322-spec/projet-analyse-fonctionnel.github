@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dossier d'analyse fonctionnelle d'un robot pédagogique myCobot 280 Pi / mechArm 270 Pi.">
+  <title>Analyse fonctionnelle — Robot pédagogique</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+  <script src="mermaid.js" defer></script>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero__tag">HESTIM · 1API · GIL · Semestre 1</div>
+    <h1>Analyse fonctionnelle<br><span>Robot pédagogique</span></h1>
+    <p>Étude fonctionnelle du bras robotisé — myCobot 280 Pi / mechArm 270 Pi</p>
+    <div class="hero__meta">
+      <span>Projet de groupe</span><span>Analyse fonctionnelle</span><span>Cahier des charges fonctionnel</span>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="notice">
+      <strong>Note méthodologique</strong>
+      <p>Le fascicule HESTIM demande d'étudier les robots myCobot 280 Pi et mechArm 270 Pi. Les diagrammes ci-dessous présentent une analyse générique d'un bras robotisé pédagogique. Avant le rendu final, votre groupe doit confirmer le modèle réellement retenu et vérifier les performances dans sa documentation technique ou pendant l'observation au laboratoire.</p>
+    </section>
+
+    <section class="section">
+      <div class="section__heading"><span class="number">01</span><div><h2>Bête à cornes</h2><p>Expression du besoin auquel le produit répond.</p></div></div>
+      <div class="diagram-card">
+        <div class="mermaid">
+flowchart TB
+    U(["À qui rend-il service ?<br/><b>À l'étudiant, à l'enseignant<br/>et au laboratoire pédagogique</b>"])
+    P(["Sur quoi agit-il ?<br/><b>Sur des objets à saisir,<br/>déplacer ou positionner</b>"])
+    S(["Dans quel but ?<br/><b>Réaliser des manipulations<br/>programmées, précises et répétables</b>"])
+    R(["<b>ROBOT PÉDAGOGIQUE</b><br/>myCobot 280 Pi / mechArm 270 Pi"])
+    U --- R
+    P --- R
+    R --- S
+    classDef question fill:#E8F2FF,stroke:#2563EB,color:#123B72,stroke-width:2px;
+    classDef product fill:#123B72,stroke:#0B2447,color:#FFFFFF,stroke-width:3px;
+    class U,P,S question;
+    class R product;
+        </div>
+        <div class="legend"><span class="dot blue"></span> Besoin utilisateur <span class="dot navy"></span> Produit étudié</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section__heading"><span class="number">02</span><div><h2>Diagramme pieuvre</h2><p>Relations entre le robot et les éléments de son environnement.</p></div></div>
+      <div class="diagram-card">
+        <div class="mermaid">
+flowchart LR
+    U["FP1 · Utilisateur / opérateur"]
+    OBJ["FP2 · Objet à manipuler"]
+    EN["FC1 · Énergie électrique"]
+    CMD["FC2 · Ordinateur / commande"]
+    ENV["FC3 · Environnement du labo"]
+    SEC["FC4 · Sécurité des personnes"]
+    SUP["FC5 · Support / plan de travail"]
+    ROB(("ROBOT<br/>PÉDAGOGIQUE"))
+    U ---|"FP1 : permettre la programmation<br/>et la commande"| ROB
+    ROB ---|"FP2 : saisir, déplacer<br/>et positionner"| OBJ
+    EN ---|"FC1 : être alimenté<br/>dans les limites prévues"| ROB
+    CMD ---|"FC2 : recevoir et exécuter<br/>des instructions"| ROB
+    ENV ---|"FC3 : fonctionner dans<br/>un environnement adapté"| ROB
+    ROB ---|"FC4 : limiter les risques<br/>de collision et de pincement"| SEC
+    SUP ---|"FC5 : être fixé/stable<br/>pendant l'utilisation"| ROB
+    classDef robot fill:#123B72,stroke:#0B2447,color:#fff,stroke-width:3px;
+    classDef fp fill:#DDF7E8,stroke:#159957,color:#104B31,stroke-width:2px;
+    classDef fc fill:#FFF1D6,stroke:#D97706,color:#78350F,stroke-width:2px;
+    class ROB robot;
+    class U,OBJ fp;
+    class EN,CMD,ENV,SEC,SUP fc;
+        </div>
+        <div class="legend"><span class="dot green"></span> Fonctions principales (FP) <span class="dot amber"></span> Fonctions contraintes (FC)</div>
+      </div>
+      <p class="caption">Les intitulés FP/FC sont une proposition de travail : validez-les avec les consignes de votre enseignant et les observations du robot.</p>
+    </section>
+
+    <section class="section">
+      <div class="section__heading"><span class="number">03</span><div><h2>Tableau de caractérisation des fonctions de service</h2><p>Critères, niveaux et flexibilité proposés pour préparer le CdCF.</p></div></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Réf.</th><th>Fonction de service</th><th>Critère d'appréciation</th><th>Niveau / exigence</th><th>Flexibilité</th></tr></thead>
+          <tbody>
+            <tr class="fp-row"><td><b>FP1</b></td><td>Permettre à l'utilisateur de programmer et commander le robot.</td><td>Prise en main, compatibilité avec l'interface de commande.</td><td>Commandes accessibles et exécution conforme au programme fourni.</td><td>F1 — à confirmer</td></tr>
+            <tr class="fp-row"><td><b>FP2</b></td><td>Saisir, déplacer et positionner un objet dans la zone de travail.</td><td>Charge utile, portée, répétabilité, type de préhenseur.</td><td>Valeurs à relever dans la fiche constructeur et/ou au laboratoire.</td><td>F1 — selon l'application</td></tr>
+            <tr class="fc-row"><td><b>FC1</b></td><td>Être alimenté en énergie électrique.</td><td>Tension, courant, puissance, type d'alimentation.</td><td>Respecter strictement les caractéristiques du fabricant.</td><td>F0 — impératif</td></tr>
+            <tr class="fc-row"><td><b>FC2</b></td><td>Recevoir et exécuter les instructions de commande.</td><td>Connexion, compatibilité logicielle, temps de réponse.</td><td>Compatibilité avec les outils et interfaces disponibles au TP.</td><td>F1 — à vérifier</td></tr>
+            <tr class="fc-row"><td><b>FC3</b></td><td>Fonctionner dans l'environnement du laboratoire.</td><td>Encombrement, éclairage, température, surface disponible.</td><td>Respect des conditions d'utilisation constructeur et du règlement du laboratoire.</td><td>F1 — selon le local</td></tr>
+            <tr class="fc-row"><td><b>FC4</b></td><td>Assurer la sécurité des utilisateurs et du matériel.</td><td>Stabilité, risques de collision/pincement, arrêt de mouvement.</td><td>Respecter les consignes de sécurité et la supervision pendant le TP.</td><td>F0 — impératif</td></tr>
+            <tr class="fc-row"><td><b>FC5</b></td><td>Rester stable pendant les manipulations.</td><td>Fixation, glissement, vibrations du support.</td><td>Base correctement fixée ou posée sur un support stable adapté.</td><td>F0 — impératif</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="legend"><span class="dot green"></span> FP : fonctions principales <span class="dot amber"></span> FC : fonctions contraintes</div>
+      <p class="caption">F0 = exigence non négociable ; F1 = marge de choix possible. Les niveaux numériques (charge utile, portée, précision, alimentation) ne sont volontairement pas inventés : complétez-les après identification exacte du modèle.</p>
+    </section>
+
+    <section class="section">
+      <div class="section__heading"><span class="number">04</span><div><h2>Diagramme F.A.S.T.</h2><p>Du besoin « pourquoi ? » aux solutions techniques « comment ? ».</p></div></div>
+      <div class="diagram-card">
+        <div class="mermaid">
+flowchart LR
+    WHY["POURQUOI ?<br/>Former et réaliser<br/>des manipulations"]:::why
+    F["FONCTION PRINCIPALE<br/>Manipuler un objet<br/>selon une consigne"]:::main
+    H1["Comment ?<br/>Saisir / maintenir<br/>l'objet"]:::function
+    H2["Comment ?<br/>Déplacer le bras<br/>robotisé"]:::function
+    H3["Comment ?<br/>Positionner et<br/>relâcher l'objet"]:::function
+    S1["Préhenseur / pince<br/>(selon équipement)"]:::solution
+    S2["Articulations motorisées<br/>et structure du bras"]:::solution
+    S3["Programme de commande<br/>et interface logicielle"]:::solution
+    S4["Alimentation électrique<br/>et câblage"]:::solution
+    WHY --> F --> H1 --> S1
+    F --> H2 --> S2
+    F --> H3 --> S3
+    S4 -. "alimente les éléments" .-> S2
+    S4 -.-> S3
+    classDef why fill:#E8F2FF,stroke:#2563EB,color:#123B72,stroke-width:2px;
+    classDef main fill:#123B72,stroke:#0B2447,color:#FFFFFF,stroke-width:3px;
+    classDef function fill:#DDF7E8,stroke:#159957,color:#104B31,stroke-width:2px;
+    classDef solution fill:#F3E8FF,stroke:#9333EA,color:#581C87,stroke-width:2px;
+        </div>
+        <div class="legend"><span class="dot blue"></span> Finalité <span class="dot navy"></span> Fonction principale <span class="dot green"></span> Fonctions intermédiaires <span class="dot purple"></span> Solutions techniques possibles</div>
+      </div>
+      <p class="caption">Le FAST ci-dessus est fonctionnel et préliminaire. Ajustez les solutions techniques aux composants réellement présents sur le robot étudié.</p>
+    </section>
+
+    <section class="section checklist">
+      <h2>À vérifier avant la remise</h2>
+      <ul>
+        <li>Choisir clairement le modèle étudié : <b>myCobot 280 Pi</b> ou <b>mechArm 270 Pi</b>, ou préciser que la comparaison porte sur les deux.</li>
+        <li>Observer la base, les articulations, le préhenseur et l'interface de commande.</li>
+        <li>Compléter les niveaux chiffrés avec la documentation constructeur ou les mesures du TP.</li>
+        <li>Vérifier les fonctions avec les notes de cours et les consignes de l'enseignant.</li>
+        <li>Ajouter les noms des membres du groupe, la date et le modèle exact en page de garde si nécessaire.</li>
+      </ul>
+    </section>
+  </main>
+  <footer>HESTIM · Génie industriel et logistique · Analyse fonctionnelle des systèmes robotisés</footer>
+</body>
+</html>
